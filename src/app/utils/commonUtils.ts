@@ -40,17 +40,35 @@ export function getCalculatedData(covidDataArray: Array<Covid19Interface>): Covi
     totalCovidData.Confirmed = '0';
     totalCovidData.Deaths = '0';
     totalCovidData.Recovered = '0';
+    totalCovidData.Active = '0';
     for (const covidData of covidDataArray) {
         if (!isNaN(Number(covidData.Confirmed))) {
             totalCovidData.Confirmed = String(Number(totalCovidData.Confirmed) + Number(covidData.Confirmed));
             totalCovidData.Deaths = String(Number(totalCovidData.Deaths) + Number(covidData.Deaths));
             totalCovidData.Recovered = String(Number(totalCovidData.Recovered) + Number(covidData.Recovered));
+            totalCovidData.Active = String(Number(totalCovidData.Active) + Number(covidData.Active));
         }
     }
     totalCovidData.Confirmed = formatThousandNumber(totalCovidData.Confirmed);
     totalCovidData.Deaths = formatThousandNumber(totalCovidData.Deaths);
     totalCovidData.Recovered = formatThousandNumber(totalCovidData.Recovered);
+    totalCovidData.Active = formatThousandNumber(totalCovidData.Active);
     return totalCovidData;
+}
+
+export function updateCovidData(first: Covid19Interface, second: Covid19Interface): Covid19Interface {
+  first.Confirmed = adittionCovidData(first.Confirmed, second.Confirmed);
+  first.Deaths = adittionCovidData(first.Deaths, second.Deaths);
+  first.Recovered = adittionCovidData(first.Recovered, second.Recovered);
+  first.Active = adittionCovidData(first.Active, second.Active);
+  return first;
+}
+
+export function adittionCovidData(first: string, second: string): string {
+  if (!isNaN(Number(first)) && !isNaN(Number(second))) {
+    first = String(Number(first) + Number(second));
+  }
+  return first;
 }
 
 export function formatThousandNumber(num: string) {

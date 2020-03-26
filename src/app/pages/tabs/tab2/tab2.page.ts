@@ -27,7 +27,7 @@ export class Tab2Page implements OnInit {
   }
 
   setViewData() {
-    this.covidDataArrayView = this.covid19Service.covidDataArray.sort((a, b) => Number(b.Confirmed) - Number(a.Confirmed)).slice(0, 20);
+    this.covidDataArrayView = this.covid19Service.groupedCovidDataArray.sort((a, b) => Number(b.Confirmed) - Number(a.Confirmed)).slice(0, 10);
     this.dateTime = formatViewDateTime(this.covid19Service.dateTimeFormatInUse);
   }
 

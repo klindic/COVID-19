@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
 import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
-import { formatDateTimeNumber, handleQuotes, getCalculatedData } from 'src/app/utils/commonUtils';
+import { formatDateTimeNumber, handleQuotes, getCalculatedData, updateCovidData } from 'src/app/utils/commonUtils';
 import { Covid19Model } from 'src/app/pages/tabs/tab2/tab2.model';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class Covid19Service implements OnInit {
 
   private _covidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
   private _totalCovidData: Covid19Interface = new Covid19Model();
+  groupedCovidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
 
   fetchingData = true;
   noData = false;
@@ -72,6 +73,7 @@ export class Covid19Service implements OnInit {
       this.setCovidDataToArray(covidHeaders, covidData);
     });
     this.sortCovidData();
+    this.groupCovidData();
     this._totalCovidData = getCalculatedData(this._covidDataArray);
     this.fetchingData = false;
   }
@@ -85,11 +87,29 @@ export class Covid19Service implements OnInit {
     for (const [index, header] of covidHeaders.entries()) {
       covi19Model[header] = covidDataArray[index] ? covidDataArray[index].replace(/[&\/\\#+()$~%.'":*?<>{}]/g, '') : covidDataArray[index];
     }
-    this._covidDataArray.push(covi19Model);
+    if (covi19Model.Country_Region) {
+      this._covidDataArray.push(covi19Model);
+    }
   }
 
   sortCovidData() {
     this._covidDataArray.sort((a, b) => (a.Country_Region === b.Country_Region) ? 0 : (a.Country_Region < b.Country_Region) ? -1 : 1 );
+  }
+
+  groupCovidData() {
+    for (const covidData of this._covidDataArray) {
+      let existingCovidData = this.groupedCovidDataArray.find(data => data.Country_Region === covidData.Country_Region);
+      if (existingCovidData) {
+        existingCovidData = updateCovidData(existingCovidData, covidData);
+      } else {
+        const newCovidData = new Covid19Model();
+        Object.assign(newCovidData, covidData);
+        // Remove theese two parameters as not needed after grouping
+        newCovidData.Province_State = '';
+        newCovidData.Admin2 = '';
+        this.groupedCovidDataArray.push(newCovidData);
+      }
+    }
   }
 
 }
