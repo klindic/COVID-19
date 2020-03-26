@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title *ngIf="!noData && fetchingData">
+      Loading data...
+    </ion-title>
+    <ion-title *ngIf="noData">
+      No data...
+    </ion-title>
+    <ion-title *ngIf="!noData && !fetchingData">
+      Data for {{ dateTimeFormatInUse }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ng-container *ngIf="!noData && !fetchingData">
+    <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
+    <ion-list *ngFor="let covidData of covidDataArrayView">
+      <ion-item>
+        <ion-label>
+          <h2 class="country"><strong>{{ covidData.Country_Region }}</strong><span class="province" *ngIf="covidData.Province_State"> - {{ covidData.Province_State }}<span *ngIf="covidData.Admin2"> / {{ covidData.Admin2 }}</span></span></h2>
+          <h3>Total cases: <span class="confirmed">{{ covidData.Confirmed }}</span></h3>
+          <p>Total deaths: <span class="deaths">{{ covidData.Deaths }}</span></p>
+          <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData.Recovered }}</strong></span></h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+</ion-content>

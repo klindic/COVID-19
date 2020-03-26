@@ -1,0 +1,15 @@
+ion-content ion-toolbar {
+  --background: translucent;
+}
+
+ion-label {
+  .country, .confirmed {
+    color: var(--ion-color-primary);
+  }
+  .province {
+    color: var(--ion-color-medium);
+  }
+  .deaths {
+    color: var(--ion-color-danger);
+  }
+}
