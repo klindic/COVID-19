@@ -5,10 +5,29 @@ ion-title {
     top: 90%;
     font-size: 10px;
   }
+  .refresh-icon {
+    position: relative;
+    float: right;
+    font-size: 25px;
+    &.refreshing {
+      animation: rotation 2s infinite linear;
+    }
+  }
 }
 
 ion-content {
   .dummy-content {
     filter: blur(0.7vw) grayscale(70%);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
   }
 }

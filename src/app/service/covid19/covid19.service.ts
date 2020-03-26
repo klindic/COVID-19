@@ -9,12 +9,12 @@ import { Covid19Model } from 'src/app/pages/tabs/tab2/tab2.model';
 })
 export class Covid19Service implements OnInit {
 
-  private _covidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
-  private _totalCovidData: Covid19Interface = new Covid19Model();
-  groupedCovidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
+  private _covidDataArray: Array<Covid19Interface>;
+  private _totalCovidData: Covid19Interface;
+  groupedCovidDataArray: Array<Covid19Interface>;
 
-  fetchingData = true;
-  noData = false;
+  fetchingData: boolean;
+  noData: boolean;
   dateTimeFormatInUse: string;
 
   public get covidDataArray(): Array<Covid19Interface> {
@@ -34,6 +34,7 @@ export class Covid19Service implements OnInit {
   constructor(private _http: HTTP) {}
 
   async ngOnInit() {
+    this.resetData();
     console.log('Covid19Service ngOnInit');
     const dayInMilliseconds = 86400000;
     const dateNow = Date.now() - dayInMilliseconds;
@@ -110,6 +111,14 @@ export class Covid19Service implements OnInit {
         this.groupedCovidDataArray.push(newCovidData);
       }
     }
+  }
+
+  resetData() {
+    this.covidDataArray = new Array<Covid19Interface>();
+    this.totalCovidData = new Covid19Model();
+    this.groupedCovidDataArray = new Array<Covid19Interface>();
+    this.fetchingData = true;
+    this.noData = false;
   }
 
 }

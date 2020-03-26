@@ -2,13 +2,14 @@
   <ion-toolbar>
     <ion-title>
       Worldwide
-      <span *ngIf="totalCovidData" class="date-time">{{ dateTime }}</span>
+      <span *ngIf="!covid19Service.noData && !covid19Service.fetchingData" class="date-time">{{ dateTime }}</span>
+      <ion-icon (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="totalCovidData">
+  <ng-container *ngIf="!covid19Service.noData && !covid19Service.fetchingData && totalCovidData">
 
     <div id="container">
       <p>Coronavirus cases:</p>
@@ -23,7 +24,7 @@
 
   </ng-container>
 
-  <ng-container *ngIf="!totalCovidData">
+  <ng-container *ngIf="!covid19Service.noData && covid19Service.fetchingData">
 
     <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
 
@@ -32,7 +33,7 @@
       <h2 class="confirmed">999,999</h2>
   
       <p>Deaths:</p>
-      <h2 class="deaths">00,000</h2>
+      <h2 class="deaths">22,222</h2>
   
       <p>Recovered:</p>
       <h2 class="recovered">111,111</h2>

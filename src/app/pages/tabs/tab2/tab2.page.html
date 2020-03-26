@@ -3,6 +3,7 @@
     <ion-title>
       Country
       <span *ngIf="!covid19Service.noData && !covid19Service.fetchingData" class="date-time">{{ dateTime }}</span>
+      <ion-icon id="refreshIcon" (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,7 +14,7 @@
     No data...
   </ng-container>
 
-  <ng-container *ngIf="!covid19Service.noData && !covid19Service.fetchingData">
+  <ng-container *ngIf="!covid19Service.noData && !covid19Service.fetchingData && covidDataArrayView">
 
     <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
 

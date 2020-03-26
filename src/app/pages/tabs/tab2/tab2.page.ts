@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
 import { Covid19Service } from 'src/app/service/covid19/covid19.service';
 import { formatViewDateTime } from 'src/app/utils/commonUtils';
@@ -15,7 +15,8 @@ export class Tab2Page implements OnInit {
 
   dummyArray: Array<number> = new Array(20).fill(1);
 
-  constructor(public covid19Service: Covid19Service) {}
+  constructor(public covid19Service: Covid19Service,
+              private elRef: ElementRef) {}
 
   async ngOnInit() {
     const interval = setInterval(() => {
@@ -34,10 +35,20 @@ export class Tab2Page implements OnInit {
   search(event: CustomEvent) {
     const value = (event.detail.value as string).toLowerCase();
     this.covidDataArrayView = value ?
-      this.covid19Service.covidDataArray.filter(covidData => {
+      this.covid19Service.groupedCovidDataArray.filter(covidData => {
         return (covidData.Country_Region && covidData.Country_Region.toLowerCase().includes(value)) ||
           (covidData.Province_State && covidData.Province_State.toLowerCase().includes(value));
-      }).slice(0, 20) : this.covid19Service.covidDataArray.slice(0, 20);
+      }).slice(0, 20) : this.covid19Service.groupedCovidDataArray.slice(0, 10);
+  }
+
+  async refreshData() {
+    if (!this.covid19Service.fetchingData) {
+      const refreshIcon = this.elRef.nativeElement.querySelector('ion-title ion-icon');
+      refreshIcon.classList.add('refreshing');
+      await this.covid19Service.ngOnInit();
+      this.setViewData();
+      refreshIcon.classList.remove('refreshing');
+    }
   }
 
 }
