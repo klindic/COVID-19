@@ -66,3 +66,7 @@ export function formatThousandNumber(num: string) {
     }
     return arr.join('');
 }
+
+export async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

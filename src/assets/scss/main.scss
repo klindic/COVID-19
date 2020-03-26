@@ -1,8 +1,14 @@
 ion-title {
-    .date-time {
-      position: absolute;
-      left: 20px;
-      top: 90%;
-      font-size: 10px;
-    }
+  .date-time {
+    position: absolute;
+    left: 20px;
+    top: 90%;
+    font-size: 10px;
   }
+}
+
+ion-content {
+  .dummy-content {
+    filter: blur(0.7vw) grayscale(70%);
+  }
+}
