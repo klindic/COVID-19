@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Worldwide
+      <span *ngIf="!covid19Service.noData && !covid19Service.fetchingData" class="date-time">{{ dateTime }}</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>

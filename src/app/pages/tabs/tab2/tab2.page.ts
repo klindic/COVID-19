@@ -13,6 +13,8 @@ export class Tab2Page implements OnInit {
   covidDataArrayView: Array<Covid19Interface> = new Array();
   dateTime: string;
 
+  dummyArray: Array<number> = new Array(20).fill(1);
+
   constructor(public covid19Service: Covid19Service) {}
 
   async ngOnInit() {

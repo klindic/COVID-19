@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
 import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
 import { HelpersService } from 'src/app/services/helpers/helpers.service';
-import { formatDateTimeNumber, handleQuotes, getGlobalData } from 'src/app/utils/commonUtils';
+import { formatDateTimeNumber, handleQuotes, getCalculatedData } from 'src/app/utils/commonUtils';
 import { Covid19Model } from 'src/app/pages/tabs/tab2/tab2.model';
 
 @Injectable({
@@ -46,7 +46,7 @@ export class Covid19Service implements OnInit {
 
     let url = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${todayDateTimeFormat}.csv`;
 
-    await this.helpersService.presentLoading('Loading data...');
+    // await this.helpersService.presentLoading('Loading data...');
     try {
       this.dateTimeFormatInUse = todayDateTimeFormat;
       await this.httpRequest(url);
@@ -59,7 +59,7 @@ export class Covid19Service implements OnInit {
       } catch (error) {
         console.log('No data for yesterday. Stopping data fetching.', error);
         this.noData = true;
-        await this.helpersService.dismissLoading();
+        // await this.helpersService.dismissLoading();
       }
     }
   }
@@ -67,7 +67,7 @@ export class Covid19Service implements OnInit {
   async httpRequest(url: string) {
     const response = await this._http.get(url, {}, {});
     this.handleData(response);
-    await this.helpersService.dismissLoading();
+    // await this.helpersService.dismissLoading();
   }
 
   handleData(response: HTTPResponse) {
@@ -77,7 +77,7 @@ export class Covid19Service implements OnInit {
       this.setCovidDataToArray(covidHeaders, covidData);
     });
     this.sortCovidData();
-    this._totalCovidData = getGlobalData(this._covidDataArray);
+    this._totalCovidData = getCalculatedData(this._covidDataArray);
     this.fetchingData = false;
   }
 

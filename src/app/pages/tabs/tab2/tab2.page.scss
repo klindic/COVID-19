@@ -2,15 +2,6 @@ ion-content ion-toolbar {
   --background: translucent;
 }
 
-ion-title {
-  .date-time {
-    position: absolute;
-    left: 20px;
-    top: 90%;
-    font-size: 10px;
-  }
-}
-
 ion-label {
   .country, .confirmed {
     color: var(--ion-color-primary);

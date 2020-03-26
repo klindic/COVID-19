@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Country
-      <span *ngIf="!noData && !fetchingData" class="date-time">{{ dateTime }}</span>
+      <span *ngIf="!covid19Service.noData && !covid19Service.fetchingData" class="date-time">{{ dateTime }}</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,8 +13,10 @@
     No data...
   </ng-container>
 
-  <ng-container *ngIf="!noData && !fetchingData">
+  <ng-container *ngIf="!covid19Service.noData && !covid19Service.fetchingData">
+
     <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
+
     <ion-list *ngFor="let covidData of covidDataArrayView">
       <ion-item>
         <ion-label>
@@ -25,6 +27,24 @@
         </ion-label>
       </ion-item>
     </ion-list>
+
+  </ng-container>
+
+  <ng-container *ngIf="!covid19Service.noData && covid19Service.fetchingData" class="dummy-content">
+
+    <ion-searchbar></ion-searchbar>
+
+    <ion-list *ngFor="let dummyItem of dummyArray">
+      <ion-item>
+        <ion-label>
+          <h2 class="country"><strong>Country</strong></h2>
+          <h3>Total cases: <span class="confirmed">99999</span></h3>
+          <p>Total deaths: <span class="deaths">00000</span></p>
+          <h2><strong>Recovered: </strong><span class="recovered"><strong>11111</strong></span></h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
   </ng-container>
 
 </ion-content>

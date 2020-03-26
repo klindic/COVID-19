@@ -7,7 +7,7 @@ ion-content ion-toolbar {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
+  top: calc(50% + 26px);
   transform: translateY(-50%);
 
   p {
@@ -18,8 +18,9 @@ ion-content ion-toolbar {
   }
 
   h2 {
-    font-size: 35px;
-    margin-top: 20px;
+    font-size: 37px;
+    margin-top: 10px;
+    margin-bottom: 30px;
     font-weight: bold;;
     &.confirmed {
       color: #AAAAAA;
