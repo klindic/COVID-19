@@ -1,18 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title *ngIf="!noData && fetchingData">
-      Loading data...
-    </ion-title>
-    <ion-title *ngIf="noData">
-      No data...
-    </ion-title>
-    <ion-title *ngIf="!noData && !fetchingData">
-      Data for {{ dateTimeFormatInUse }}
+    <ion-title>
+      Country
+      <span *ngIf="!noData && !fetchingData">{{ dateTimeFormatInUse }}</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ng-container *ngIf="noData">
+    No data...
+  </ng-container>
+
   <ng-container *ngIf="!noData && !fetchingData">
     <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
     <ion-list *ngFor="let covidData of covidDataArrayView">
@@ -26,4 +26,5 @@
       </ion-item>
     </ion-list>
   </ng-container>
+
 </ion-content>

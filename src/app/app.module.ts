@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP } from '@ionic-native/http/ngx';
+import { HelpersService } from './services/helpers/helpers.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,8 @@ import { HTTP } from '@ionic-native/http/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    HTTP
+    HTTP,
+    HelpersService
   ],
   bootstrap: [AppComponent]
 })

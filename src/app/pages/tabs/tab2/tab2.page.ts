@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
 import { Covid19 } from 'src/interfaces/covid19';
+import { HelpersService } from 'src/app/services/helpers/helpers.service';
 
 @Component({
   selector: 'app-tab2',
@@ -16,7 +17,8 @@ export class Tab2Page implements OnInit {
   noData = false;
   dateTimeFormatInUse: string;
 
-  constructor(private http: HTTP) {}
+  constructor(private http: HTTP,
+              private helpers: HelpersService) {}
 
   async ngOnInit() {
     const dayInMilliseconds = 86400000;
@@ -29,6 +31,7 @@ export class Tab2Page implements OnInit {
 
     let url = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${todayDateTimeFormat}.csv`;
 
+    await this.helpers.presentLoading('Loading data...');
     try {
       this.dateTimeFormatInUse = todayDateTimeFormat;
       await this.httpRequest(url);
@@ -41,6 +44,7 @@ export class Tab2Page implements OnInit {
       } catch (error) {
         console.log('No data for yesterday. Stopping data fetching.', error);
         this.noData = true;
+        await this.helpers.dismissLoading();
       }
     }
   }
@@ -48,6 +52,7 @@ export class Tab2Page implements OnInit {
   async httpRequest(url: string) {
     const response = await this.http.get(url, {}, {});
     this.handleData(response);
+    await this.helpers.dismissLoading();
   }
 
   handleData(response: HTTPResponse) {
