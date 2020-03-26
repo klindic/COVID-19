@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Country
-      <span *ngIf="!noData && !fetchingData">{{ dateTimeFormatInUse }}</span>
+      <span *ngIf="!noData && !fetchingData" class="date-time">{{ dateTime }}</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
