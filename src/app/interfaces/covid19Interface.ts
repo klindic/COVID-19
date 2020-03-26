@@ -1,4 +1,4 @@
-export interface Covid19 {
+export interface Covid19Interface {
     FIPS: string;
     Admin2: string;
     Province_State: string;

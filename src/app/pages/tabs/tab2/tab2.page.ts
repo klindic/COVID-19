@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTP, HTTPResponse } from '@ionic-native/http/ngx';
-import { Covid19 } from 'src/interfaces/covid19';
+import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
 import { HelpersService } from 'src/app/services/helpers/helpers.service';
+import { Covid19Model } from './tab2.model';
 
 @Component({
   selector: 'app-tab2',
@@ -10,8 +11,8 @@ import { HelpersService } from 'src/app/services/helpers/helpers.service';
 })
 export class Tab2Page implements OnInit {
 
-  private _covidDataArray: Array<Covid19> = new Array();
-  covidDataArrayView: Array<Covid19> = new Array();
+  private _covidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
+  covidDataArrayView: Array<Covid19Interface> = new Array();
 
   fetchingData = true;
   noData = false;
@@ -22,7 +23,7 @@ export class Tab2Page implements OnInit {
 
   async ngOnInit() {
     const dayInMilliseconds = 86400000;
-    const dateNow = Date.now();
+    const dateNow = Date.now() - dayInMilliseconds;
     const todayDate = new Date(dateNow);
     const yesterdayDate = new Date(dateNow - dayInMilliseconds);
 
@@ -69,25 +70,13 @@ export class Tab2Page implements OnInit {
   setDataToArray(covidHeaders: Array<string>, covidDataString: string) {
     covidDataString = this.handleQuotes(covidDataString);
     const covidDataArray = covidDataString.split(',');
-    const obj: Covid19 = {
-      FIPS: '',
-      Admin2: '',
-      Province_State: '',
-      Country_Region: '',
-      Last_Update: '',
-      Lat: '',
-      Long_: '',
-      Confirmed: '',
-      Deaths: '',
-      Recovered: '',
-      Active: '',
-      Combined_Key: '',
-    };
+
+    const covi19Model: Covid19Interface = new Covid19Model();
 
     for (const [index, header] of covidHeaders.entries()) {
-      obj[header] = covidDataArray[index] ? covidDataArray[index].replace(/[&\/\\#+()$~%.'":*?<>{}]/g, '') : covidDataArray[index];
+      covi19Model[header] = covidDataArray[index] ? covidDataArray[index].replace(/[&\/\\#+()$~%.'":*?<>{}]/g, '') : covidDataArray[index];
     }
-    this._covidDataArray.push(obj);
+    this._covidDataArray.push(covi19Model);
   }
 
   sortCovidData() {
