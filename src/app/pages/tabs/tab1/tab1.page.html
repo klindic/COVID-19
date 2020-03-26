@@ -7,8 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <strong>{{ name }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngIf="totalCovidData" id="container">
+
+    <p>Coronavirus cases:</p>
+    <h2 class="confirmed">{{ totalCovidData.Confirmed }}</h2>
+
+    <p>Deaths:</p>
+    <h2 class="deaths">{{ totalCovidData.Deaths }}</h2>
+
+    <p>Recovered:</p>
+    <h2 class="recovered">{{ totalCovidData.Recovered }}</h2>
+
   </div>
 </ion-content>

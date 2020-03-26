@@ -11,7 +11,7 @@ import { Covid19Model } from 'src/app/pages/tabs/tab2/tab2.model';
 export class Covid19Service implements OnInit {
 
   private _covidDataArray: Array<Covid19Interface> = new Array<Covid19Interface>();
-  private _globalData: Covid19Interface = new Covid19Model();
+  private _totalCovidData: Covid19Interface = new Covid19Model();
 
   fetchingData = true;
   noData = false;
@@ -22,6 +22,13 @@ export class Covid19Service implements OnInit {
   }
   public set covidDataArray(value: Array<Covid19Interface>) {
     this._covidDataArray = value;
+  }
+
+  public get totalCovidData(): Covid19Interface {
+    return this._totalCovidData;
+  }
+  public set totalCovidData(value: Covid19Interface) {
+    this._totalCovidData = value;
   }
 
   constructor(private _http: HTTP,
@@ -70,7 +77,7 @@ export class Covid19Service implements OnInit {
       this.setCovidDataToArray(covidHeaders, covidData);
     });
     this.sortCovidData();
-    this._globalData = getGlobalData(this._covidDataArray);
+    this._totalCovidData = getGlobalData(this._covidDataArray);
     this.fetchingData = false;
   }
 

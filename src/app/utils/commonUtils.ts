@@ -35,5 +35,6 @@ export function formatViewDateTime(dateTimeInUse: string) {
 }
 
 export function getGlobalData(covidDataArray: Array<Covid19Interface>): Covid19Interface {
+    // TODO: do the calculations
     return covidDataArray[0];
 }
