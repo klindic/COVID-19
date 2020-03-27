@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Covid19Service } from './service/covid19/covid19.service';
+import { Covid19Service } from './services/covid19/covid19.service';
 
 declare var window: any;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
-import { Covid19Service } from 'src/app/service/covid19/covid19.service';
+import { Covid19Service } from 'src/app/services/covid19/covid19.service';
 import { formatViewDateTime } from 'src/app/utils/commonUtils';
 
 @Component({
