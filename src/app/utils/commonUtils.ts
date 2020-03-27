@@ -12,7 +12,7 @@ export function handleQuotes(covidDataString: string): string {
       indexes.push(i);
     }
   }
-  if (indexes.length) {
+  if (indexes.length && covidDataString) {
     let startingIndex: number;
     let endingIndex: number;
     let stringBewteenChars: string;
