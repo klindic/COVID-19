@@ -12,7 +12,7 @@
 
   <div id="container" *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && covidDataArrayView">
 
-    <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Search" showCancelButton="focus" debounce="300" (ionChange)="search($event)"></ion-searchbar>
 
     <ion-list *ngFor="let covidData of covidDataArrayView">
       <ion-item>
