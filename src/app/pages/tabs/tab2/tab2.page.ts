@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CoronavirusService } from 'src/app/services/coronavirus/coronavirus.service';
-import { formatDateTimeNumber } from 'src/app/utils/commonUtils';
 import { CoronavirusModel } from 'src/app/models/coronavirusModel';
 
 @Component({
@@ -27,15 +26,15 @@ export class Tab2Page implements OnInit {
   }
 
   setViewData() {
-    this.covidDataArrayView = this.coronavirusService.coronavirusData.slice(0, 20);
+    this.covidDataArrayView = this.coronavirusService.coronavirusData.slice(0, 10);
   }
 
   search(event: CustomEvent) {
     const value = (event.detail.value as string).toLowerCase();
     this.covidDataArrayView = value ?
-      this.coronavirusService.coronavirusData.filter(covidData => {
-        covidData.country.toLowerCase().includes(value);
-      }).slice(0, 20) : this.coronavirusService.coronavirusData.slice(0, 20);
+      this.coronavirusService.coronavirusData.filter(covidData =>
+          covidData.country.toLowerCase().includes(value)
+        ).slice(0, 20) : this.coronavirusService.coronavirusData.slice(0, 10);
   }
 
   async refreshData() {
