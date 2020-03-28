@@ -2,17 +2,13 @@
   <ion-toolbar>
     <ion-title>
       Country
-      <span *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData" class="date-time">{{ coronavirusService.dateTime }}</span>
+      <span class="date-time">{{ coronavirusService.dateTime }}</span>
       <ion-icon id="refreshIcon" (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ng-container *ngIf="coronavirusService.noData">
-    No data...
-  </ng-container>
 
   <ng-container *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && covidDataArrayView">
 
@@ -43,6 +39,23 @@
           <h3>Total cases: <span class="confirmed">99999</span></h3>
           <p>Total deaths: <span class="deaths">00000</span></p>
           <h2><strong>Recovered: </strong><span class="recovered"><strong>11111</strong></span></h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ng-container>
+
+  <ng-container *ngIf="coronavirusService.noData">
+
+    <ion-searchbar></ion-searchbar>
+
+    <ion-list *ngFor="let dummyItem of dummyArray">
+      <ion-item>
+        <ion-label>
+          <h2 class="country"><strong>Country</strong></h2>
+          <h3>Total cases: <span class="confirmed">No data</span></h3>
+          <p>Total deaths: <span class="deaths">No data</span></p>
+          <h2><strong>Recovered: </strong><span class="recovered"><strong>No data</strong></span></h2>
         </ion-label>
       </ion-item>
     </ion-list>

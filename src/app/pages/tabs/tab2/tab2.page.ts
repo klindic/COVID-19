@@ -11,7 +11,7 @@ export class Tab2Page implements OnInit {
 
   covidDataArrayView: Array<CoronavirusModel> = new Array();
 
-  dummyArray: Array<number> = new Array(20).fill(1);
+  dummyArray: Array<number> = new Array(10).fill(1);
 
   constructor(public coronavirusService: CoronavirusService,
               private elRef: ElementRef) {}

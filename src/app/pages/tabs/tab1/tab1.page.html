@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Worldwide
-      <span *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData" class="date-time">{{ coronavirusService.dateTime }}</span>
+      <span class="date-time">{{ coronavirusService.dateTime }}</span>
       <ion-icon (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
@@ -41,4 +41,23 @@
 
   </ng-container>
 
+  <ng-container *ngIf="coronavirusService.noData">
+
+    <div id="container">
+      <p>Coronavirus cases:</p>
+      <h2 class="confirmed">No data</h2>
+  
+      <p>Deaths:</p>
+      <h2 class="deaths">No data</h2>
+  
+      <p>Recovered:</p>
+      <h2 class="recovered">No data</h2>
+    </div>
+
+  </ng-container>
+
 </ion-content>
+
+<footer>
+  <p>© Copyright Worldometers.info - All rights reserved - <a href="https://www.worldometers.info/disclaimer/" rel="noopener norefferer">Disclaimer & Privacy Policy</a></p>
+</footer>
