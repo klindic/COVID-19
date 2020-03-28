@@ -1,41 +1,21 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Covid19Interface } from 'src/app/interfaces/covid19Interface';
-import { Covid19Service } from 'src/app/services/covid19/covid19.service';
-import { formatViewDateTime } from 'src/app/utils/commonUtils';
+import { Component, ElementRef } from '@angular/core';
+import { CoronavirusService } from 'src/app/services/coronavirus/coronavirus.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
 
-  totalCovidData: Covid19Interface = undefined;
-  dateTime: string;
-
-  constructor(private covid19Service: Covid19Service,
+  constructor(public coronavirusService: CoronavirusService,
               private elRef: ElementRef) {}
 
-  ngOnInit() {
-    const interval = setInterval(() => {
-      if (!this.covid19Service.fetchingData) {
-        this.setViewData();
-        clearInterval(interval);
-      }
-    }, 200);
-  }
-
-  setViewData() {
-    this.totalCovidData = this.covid19Service.totalCovidData;
-    this.dateTime = formatViewDateTime(this.covid19Service.dateTimeFormatInUse);
-  }
-
   async refreshData() {
-    if (!this.covid19Service.fetchingData) {
+    if (!this.coronavirusService.fetchingData) {
       const refreshIcon = this.elRef.nativeElement.querySelector('ion-title ion-icon');
       refreshIcon.classList.add('refreshing');
-      await this.covid19Service.ngOnInit();
-      this.setViewData();
+      await this.coronavirusService.ngOnInit();
       refreshIcon.classList.remove('refreshing');
     }
   }

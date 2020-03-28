@@ -13,6 +13,9 @@ ion-content {
     .deaths {
       color: var(--ion-color-danger);
     }
+    span.new {
+      padding-left: 10px;
+    }
   }
 
 }

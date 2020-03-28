@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Country
-      <span *ngIf="!covid19Service.noData && !covid19Service.fetchingData" class="date-time">{{ dateTime }}</span>
+      <span *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData" class="date-time">{{ coronavirusService.dateTime }}</span>
       <ion-icon id="refreshIcon" (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
@@ -10,28 +10,28 @@
 
 <ion-content [fullscreen]="true">
 
-  <ng-container *ngIf="noData">
+  <ng-container *ngIf="coronavirusService.noData">
     No data...
   </ng-container>
 
-  <ng-container *ngIf="!covid19Service.noData && !covid19Service.fetchingData && covidDataArrayView">
+  <ng-container *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && covidDataArrayView">
 
     <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
 
     <ion-list *ngFor="let covidData of covidDataArrayView">
       <ion-item>
         <ion-label>
-          <h2 class="country"><strong>{{ covidData.Country_Region }}</strong><span class="province" *ngIf="covidData.Province_State"> - {{ covidData.Province_State }}<span *ngIf="covidData.Admin2"> / {{ covidData.Admin2 }}</span></span></h2>
-          <h3>Total cases: <span class="confirmed">{{ covidData.Confirmed }}</span></h3>
-          <p>Total deaths: <span class="deaths">{{ covidData.Deaths }}</span></p>
-          <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData.Recovered }}</strong></span></h2>
+          <h2 class="country"><strong>{{ covidData.country }}</strong></h2>
+          <h3>Total cases: <span class="confirmed">{{ covidData.totalCases }}</span><span class="new">{{ covidData.newCases }}</span></h3>
+          <p>Total deaths: <span class="deaths">{{ covidData.totalDeaths }}</span><span class="new">{{ covidData.newDeaths }}</span></p>
+          <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData.totalRecovered }}</strong></span></h2>
         </ion-label>
       </ion-item>
     </ion-list>
 
   </ng-container>
 
-  <ng-container *ngIf="!covid19Service.noData && covid19Service.fetchingData" class="dummy-content">
+  <ng-container *ngIf="!coronavirusService.noData && coronavirusService.fetchingData" class="dummy-content">
 
     <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
     <ion-searchbar class="dummy-content"></ion-searchbar>
