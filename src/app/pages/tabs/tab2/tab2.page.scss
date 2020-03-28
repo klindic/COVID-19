@@ -14,7 +14,8 @@ ion-content {
       color: var(--ion-color-danger);
     }
     span.new {
-      padding-left: 10px;
+      position: relative;
+      float: right;
     }
   }
 

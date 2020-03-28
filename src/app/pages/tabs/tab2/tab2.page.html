@@ -18,8 +18,8 @@
       <ion-item>
         <ion-label>
           <h2 class="country"><strong>{{ covidData.country }}</strong></h2>
-          <h3>Total cases: <span class="confirmed">{{ covidData.totalCases }}</span><span class="new">{{ covidData.newCases }}</span></h3>
-          <p>Total deaths: <span class="deaths">{{ covidData.totalDeaths }}</span><span class="new">{{ covidData.newDeaths }}</span></p>
+          <h3>Total cases: <span class="confirmed">{{ covidData.totalCases }}</span><span *ngIf="covidData.newCases" class="new">Today: {{ covidData.newCases }}</span></h3>
+          <p>Total deaths: <span class="deaths">{{ covidData.totalDeaths }}</span><span *ngIf="covidData.newDeaths" class="new">Today: {{ covidData.newDeaths }}</span></p>
           <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData.totalRecovered }}</strong></span></h2>
         </ion-label>
       </ion-item>
