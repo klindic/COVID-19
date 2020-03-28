@@ -8,9 +8,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="logScrolling($event)">
 
-  <ng-container *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && covidDataArrayView">
+  <div id="container" *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && covidDataArrayView">
 
     <ion-searchbar placeholder="Search" showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
 
@@ -25,9 +25,11 @@
       </ion-item>
     </ion-list>
 
-  </ng-container>
+    <ion-spinner *ngIf="!scrollLoadingDisabled" name="lines" class="loading-spinner"></ion-spinner>
 
-  <ng-container *ngIf="!coronavirusService.noData && coronavirusService.fetchingData" class="dummy-content">
+  </div>
+
+  <ng-container *ngIf="!coronavirusService.noData && coronavirusService.fetchingData">
 
     <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
     <ion-searchbar class="dummy-content"></ion-searchbar>

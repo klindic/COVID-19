@@ -19,4 +19,15 @@ ion-content {
     }
   }
 
+  .loading-spinner {
+    left: 50%;
+    transform: translateX(-50%);
+    height: 20px !important;
+    width: 20px !important;
+    svg {
+      height: 20px !important;
+      width: 20px !important;
+    }
+  }
+
 }

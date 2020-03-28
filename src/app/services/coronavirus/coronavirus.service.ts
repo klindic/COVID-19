@@ -24,7 +24,6 @@ export class CoronavirusService implements OnInit {
       const covTable = this.getCovTable(covDocument);
       this.extractDataFromTable(covTable);
       this.sortCoronavirusData();
-      console.log(this.totalData);
       this.fetchingData = false;
     } else {
       this.fetchingData = false;
