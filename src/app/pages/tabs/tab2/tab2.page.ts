@@ -39,7 +39,7 @@ export class Tab2Page implements OnInit {
     this.covidDataArrayView = value ?
       this.coronavirusService.coronavirusData.filter(covidData =>
           covidData.country.toLowerCase().includes(value)
-        ).slice(0, 10) : this.coronavirusService.coronavirusData.slice(0, 10);
+        ).slice(0, 20) : this.coronavirusService.coronavirusData.slice(0, 10);
     this.itemsCounter = 10;
     this.scrollLoadingDisabled = value ? true : false;
   }
