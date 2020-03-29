@@ -17,16 +17,18 @@
 
     <ion-searchbar placeholder="Search" showCancelButton="focus" debounce="300" (ionChange)="search($event)"></ion-searchbar>
 
-    <ion-list *ngFor="let covidData of covidDataArrayView" class="ion-activatable ripple-parent">
-      <ion-item (click)="navigateDetail(covidData)">
-        <ion-label>
-          <h2 class="country"><strong>{{ covidData?.country }}</strong></h2>
-          <h3>Total cases: <span class="confirmed">{{ covidData?.totalCases }}</span><span *ngIf="covidData?.newCases" class="new">Today: {{ covidData?.newCases }}</span></h3>
-          <p>Total deaths: <span class="deaths">{{ covidData?.totalDeaths }}</span><span *ngIf="covidData?.newDeaths" class="new">Today: {{ covidData?.newDeaths }}</span></p>
-          <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData?.totalRecovered }}</strong></span></h2>
-        </ion-label>
-      </ion-item>
-      <ion-ripple-effect></ion-ripple-effect>
+    <ion-list>
+      <div *ngFor="let covidData of covidDataArrayView" class="ion-activatable ripple-parent">
+        <ion-item (click)="navigateDetail(covidData)">
+          <ion-label>
+            <h2 class="country"><strong>{{ covidData?.country }}</strong></h2>
+            <h3>Total cases: <span class="confirmed">{{ covidData?.totalCases }}</span><span *ngIf="covidData?.newCases" class="new">Today: {{ covidData?.newCases }}</span></h3>
+            <p>Total deaths: <span class="deaths">{{ covidData?.totalDeaths }}</span><span *ngIf="covidData?.newDeaths" class="new">Today: {{ covidData?.newDeaths }}</span></p>
+            <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData?.totalRecovered }}</strong></span></h2>
+          </ion-label>
+        </ion-item>
+        <ion-ripple-effect></ion-ripple-effect>
+      </div>
     </ion-list>
 
     <ion-spinner *ngIf="!scrollLoadingDisabled" name="lines" class="loading-spinner"></ion-spinner>
@@ -38,15 +40,17 @@
     <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
     <ion-searchbar class="dummy-content"></ion-searchbar>
 
-    <ion-list *ngFor="let dummyItem of dummyArray" class="dummy-content">
-      <ion-item>
-        <ion-label>
-          <h2 class="country"><strong>Country</strong></h2>
-          <h3>Total cases: <span class="confirmed">99999</span></h3>
-          <p>Total deaths: <span class="deaths">00000</span></p>
-          <h2><strong>Recovered: </strong><span class="recovered"><strong>11111</strong></span></h2>
-        </ion-label>
-      </ion-item>
+    <ion-list class="dummy-content">
+      <div *ngFor="let dummyItem of dummyArray">
+        <ion-item>
+          <ion-label>
+            <h2 class="country"><strong>Country</strong></h2>
+            <h3>Total cases: <span class="confirmed">99999</span></h3>
+            <p>Total deaths: <span class="deaths">00000</span></p>
+            <h2><strong>Recovered: </strong><span class="recovered"><strong>11111</strong></span></h2>
+          </ion-label>
+        </ion-item>
+      </div>
     </ion-list>
 
   </ng-container>
