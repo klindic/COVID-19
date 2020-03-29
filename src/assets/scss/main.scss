@@ -1,5 +1,6 @@
 ion-header {
   ion-title {
+    padding-right: unset;
     .date-time {
       position: absolute;
       left: 20px;
@@ -9,9 +10,12 @@ ion-header {
     .refresh-icon {
       position: relative;
       float: right;
-      font-size: 25px;
-      &.refreshing {
-        animation: rotation 2s infinite linear;
+      margin-right: 20px;
+      ion-icon {
+        font-size: 25px;
+        &.refreshing {
+          animation: rotation 2s infinite linear;
+        }
       }
     }
   }
@@ -48,5 +52,16 @@ footer {
   to {
     transform: rotate(359deg);
     -webkit-transform: rotate(359deg);
+  }
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+  &.ripple-visible {
+    overflow: visible;
+  }
+  ion-ripple-effect {
+    z-index: 1;
   }
 }

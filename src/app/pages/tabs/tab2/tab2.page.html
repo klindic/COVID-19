@@ -3,7 +3,10 @@
     <ion-title>
       Country
       <span class="date-time">{{ coronavirusService?.dateTime }}</span>
-      <ion-icon id="refreshIcon" (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
+      <div class="refresh-icon ion-activatable ripple-parent ripple-visible">
+        <ion-icon (click)="refreshData()" name="refresh"></ion-icon>
+        <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,7 +17,7 @@
 
     <ion-searchbar placeholder="Search" showCancelButton="focus" debounce="300" (ionChange)="search($event)"></ion-searchbar>
 
-    <ion-list *ngFor="let covidData of covidDataArrayView">
+    <ion-list *ngFor="let covidData of covidDataArrayView" class="ion-activatable ripple-parent">
       <ion-item (click)="navigateDetail(covidData)">
         <ion-label>
           <h2 class="country"><strong>{{ covidData?.country }}</strong></h2>
@@ -23,6 +26,7 @@
           <h2><strong>Recovered: </strong><span class="recovered"><strong>{{ covidData?.totalRecovered }}</strong></span></h2>
         </ion-label>
       </ion-item>
+      <ion-ripple-effect></ion-ripple-effect>
     </ion-list>
 
     <ion-spinner *ngIf="!scrollLoadingDisabled" name="lines" class="loading-spinner"></ion-spinner>
