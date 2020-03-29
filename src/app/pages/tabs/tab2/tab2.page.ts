@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CoronavirusService } from 'src/app/services/coronavirus/coronavirus.service';
 import { CoronavirusModel } from 'src/app/models/coronavirusModel';
+import { NavigationService } from 'src/app/services/navigation/navigation.service';
 
 @Component({
   selector: 'app-tab2',
@@ -17,7 +18,8 @@ export class Tab2Page implements OnInit {
   scrollLoadingDisabled: boolean;
 
   constructor(public coronavirusService: CoronavirusService,
-              private elRef: ElementRef) {}
+              private elRef: ElementRef,
+              private nav: NavigationService) {}
 
   async ngOnInit() {
     const interval = setInterval(() => {
@@ -76,6 +78,13 @@ export class Tab2Page implements OnInit {
       this.itemsCounter += 10;
       this.covidDataArrayView = this.coronavirusService.coronavirusData.slice(0, this.itemsCounter);
     }, 250);
+  }
+
+  navigateDetail(covidData: CoronavirusModel) {
+    const params = {
+      covidData
+    };
+    this.nav.navigate(['country-detail'], params);
   }
 
 }

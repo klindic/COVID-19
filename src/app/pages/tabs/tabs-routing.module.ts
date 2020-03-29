@@ -48,6 +48,10 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/tab1',
     pathMatch: 'full'
+  },
+  {
+    path: 'country-detail',
+    loadChildren: () => import('../country-detail/country-detail/country-detail.module').then( m => m.CountryDetailPageModule)
   }
 ];
 

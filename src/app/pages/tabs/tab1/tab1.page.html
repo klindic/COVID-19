@@ -2,29 +2,29 @@
   <ion-toolbar>
     <ion-title>
       Worldwide
-      <span class="date-time">{{ coronavirusService.dateTime }}</span>
+      <span class="date-time">{{ coronavirusService?.dateTime }}</span>
       <ion-icon (click)="refreshData()" class="refresh-icon" name="refresh"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ng-container *ngIf="!coronavirusService.noData && !coronavirusService.fetchingData && coronavirusService.totalData">
+  <ng-container *ngIf="!coronavirusService?.noData && !coronavirusService?.fetchingData && coronavirusService?.totalData">
 
     <div id="container">
       <p>Coronavirus cases:</p>
-      <h2 class="confirmed">{{ coronavirusService.totalData.totalCases }}</h2>
+      <h2 class="confirmed">{{ coronavirusService?.totalData?.totalCases }}</h2>
   
       <p>Deaths:</p>
-      <h2 class="deaths">{{ coronavirusService.totalData.totalDeaths }}</h2>
+      <h2 class="deaths">{{ coronavirusService?.totalData?.totalDeaths }}</h2>
   
       <p>Recovered:</p>
-      <h2 class="recovered">{{ coronavirusService.totalData.totalRecovered }}</h2>
+      <h2 class="recovered">{{ coronavirusService?.totalData?.totalRecovered }}</h2>
     </div>
 
   </ng-container>
 
-  <ng-container *ngIf="!coronavirusService.noData && coronavirusService.fetchingData">
+  <ng-container *ngIf="!coronavirusService?.noData && coronavirusService?.fetchingData">
 
     <ion-progress-bar color="primary" type="indeterminate"></ion-progress-bar>
 
@@ -41,7 +41,7 @@
 
   </ng-container>
 
-  <ng-container *ngIf="coronavirusService.noData">
+  <ng-container *ngIf="coronavirusService?.noData">
 
     <div id="container">
       <p>Coronavirus cases:</p>
