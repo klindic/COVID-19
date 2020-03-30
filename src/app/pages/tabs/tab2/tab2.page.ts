@@ -59,7 +59,7 @@ export class Tab2Page implements OnInit {
   logScrolling($event: CustomEvent) {
     if (!this.scrollLoadingDisabled && this.itemsCounter < this.coronavirusService.coronavirusData.length) {
       try {
-        const containerHeight = document.getElementById('container').offsetHeight;
+        const containerHeight = this.elRef.nativeElement.querySelector('#container').offsetHeight;
         const ionContentHeight = ($event.target as HTMLElement).offsetHeight;
         const maxScrollTop = containerHeight - ionContentHeight;
         const spinnerMargin = 5;
