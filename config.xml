@@ -3,7 +3,7 @@
     <name>COVID-19</name>
     <description>App for tracking data for COVID-19</description>
     <author email="klindic94kristijan@gmail.com" href="mailto:klindic94kristijan@gmail.com">Kristijan Klindić</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
