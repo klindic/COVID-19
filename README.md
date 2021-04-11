@@ -1,2 +1,3 @@
 # COVID-19
-COVID-19 Tracker Mobile app
+A simple COVID-19 Tracker Mobile app
+- Ionic4 used
